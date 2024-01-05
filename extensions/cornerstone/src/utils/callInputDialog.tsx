@@ -131,11 +131,18 @@ export function callInputDialogForCustomLabel(
   });
 }
 
-export function showLabelAnnotationPopup(measurement, uiDialogService, labelConfig) {
+export function showLabelAnnotationPopup(
+  measurementId,
+  uiDialogService,
+  labelConfig,
+  measurementService
+) {
   const exclusive = labelConfig ? labelConfig.exclusive : false;
   const dropDownItems = labelConfig ? labelConfig.items : [];
   return new Promise<Map<any, any>>((resolve, reject) => {
+    let measurement = measurementService.getMeasurement(measurementId);
     const labellingDoneCallback = value => {
+      measurement = measurementService.getMeasurement(measurementId);
       uiDialogService.dismiss({ id: 'select-annotation' });
       if (typeof value === 'string') {
         measurement.label = value;

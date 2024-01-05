@@ -139,6 +139,9 @@ import iconToolEraser from './../../assets/icons/icon-tool-eraser.svg';
 import iconToolScissor from './../../assets/icons/icon-tool-scissor.svg';
 import iconToolShape from './../../assets/icons/icon-tool-shape.svg';
 import iconToolThreshold from './../../assets/icons/icon-tool-threshold.svg';
+import toolSculptor from './../../assets/icons/tool-sculptor.svg';
+import toolOpenFreehand from './../../assets/icons/tool-open-freehand.svg';
+import toolClosedFreehand from './../../assets/icons/tool-closed-freehand.svg';
 
 /** Old OHIF */
 import oldTrash from './../../assets/icons/old-trash.svg';
@@ -285,6 +288,10 @@ const ICONS = {
   'icon-tool-scissor': iconToolScissor,
   'icon-tool-shape': iconToolShape,
   'icon-tool-threshold': iconToolThreshold,
+  'tool-sculptor': toolSculptor,
+  'tool-open-freehand': toolOpenFreehand,
+  'tool-closed-freehand': toolClosedFreehand,
+  'tool-contour': toolClosedFreehand,
 
   /** Old OHIF */
   'old-trash': oldTrash,

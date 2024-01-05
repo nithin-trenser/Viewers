@@ -28,10 +28,14 @@ import {
   CircleScissorsTool,
   RectangleScissorsTool,
   SphereScissorsTool,
+  ContourROITool,
 } from '@cornerstonejs/tools';
 
 import CalibrationLineTool from './tools/CalibrationLineTool';
 import ImageOverlayViewerTool from './tools/ImageOverlayViewerTool';
+import ClosedFreehandROITool from './tools/ClosedFreehandROITool';
+import OpenFreehandROITool from './tools/OpenFreehandROITool';
+import FreehandROISculptorTool from './tools/FreehandROISculptorTool';
 
 export default function initCornerstoneTools(configuration = {}) {
   CrosshairsTool.isAnnotation = false;
@@ -66,6 +70,10 @@ export default function initCornerstoneTools(configuration = {}) {
   addTool(RectangleScissorsTool);
   addTool(SphereScissorsTool);
   addTool(ImageOverlayViewerTool);
+  addTool(ContourROITool);
+  addTool(FreehandROISculptorTool);
+  addTool(ClosedFreehandROITool);
+  addTool(OpenFreehandROITool);
 
   // Modify annotation tools to use dashed lines on SR
   const annotationStyle = {
@@ -111,6 +119,10 @@ const toolNames = {
   RectangleScissors: RectangleScissorsTool.toolName,
   SphereScissors: SphereScissorsTool.toolName,
   ImageOverlayViewer: ImageOverlayViewerTool.toolName,
+  ContourROITool: ContourROITool.toolName,
+  FreehandROISculptorTool: FreehandROISculptorTool.toolName,
+  ClosedFreehandROI: ClosedFreehandROITool.toolName,
+  OpenFreehandROI: OpenFreehandROITool.toolName,
 };
 
 export { toolNames };

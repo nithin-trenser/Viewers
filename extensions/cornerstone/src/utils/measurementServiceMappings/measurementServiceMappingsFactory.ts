@@ -8,6 +8,8 @@ import CobbAngle from './CobbAngle';
 import Angle from './Angle';
 import PlanarFreehandROI from './PlanarFreehandROI';
 import RectangleROI from './RectangleROI';
+import FreehandROI from './FreehandROI';
+import ContourROI from './ContourROI';
 
 const measurementServiceMappingsFactory = (
   measurementService: MeasurementService,
@@ -39,6 +41,9 @@ const measurementServiceMappingsFactory = (
       ArrowAnnotate: POINT,
       CobbAngle: ANGLE,
       Angle: ANGLE,
+      OpenFreehandROI: POLYLINE,
+      ClosedFreehandROI: POLYLINE,
+      ContourROI: POLYLINE,
     };
 
     return TOOL_TYPE_TO_VALUE_TYPE[toolType];
@@ -193,6 +198,54 @@ const measurementServiceMappingsFactory = (
       matchingCriteria: [
         {
           valueType: MeasurementService.VALUE_TYPES.ANGLE,
+        },
+      ],
+    },
+
+    OpenFreehandROI: {
+      toAnnotation: FreehandROI.toAnnotation,
+      toMeasurement: csToolsAnnotation =>
+        FreehandROI.toMeasurement(
+          csToolsAnnotation,
+          displaySetService,
+          cornerstoneViewportService,
+          _getValueTypeFromToolType
+        ),
+      matchingCriteria: [
+        {
+          valueType: MeasurementService.VALUE_TYPES.POLYLINE,
+        },
+      ],
+    },
+
+    ClosedFreehandROI: {
+      toAnnotation: FreehandROI.toAnnotation,
+      toMeasurement: csToolsAnnotation =>
+        FreehandROI.toMeasurement(
+          csToolsAnnotation,
+          displaySetService,
+          cornerstoneViewportService,
+          _getValueTypeFromToolType
+        ),
+      matchingCriteria: [
+        {
+          valueType: MeasurementService.VALUE_TYPES.POLYLINE,
+        },
+      ],
+    },
+
+    ContourROI: {
+      toAnnotation: ContourROI.toAnnotation,
+      toMeasurement: csToolsAnnotation =>
+        ContourROI.toMeasurement(
+          csToolsAnnotation,
+          displaySetService,
+          cornerstoneViewportService,
+          _getValueTypeFromToolType
+        ),
+      matchingCriteria: [
+        {
+          valueType: MeasurementService.VALUE_TYPES.POLYLINE,
         },
       ],
     },

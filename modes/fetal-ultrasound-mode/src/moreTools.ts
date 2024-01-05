@@ -217,6 +217,21 @@ const moreTools = [
           ],
           'Dicom Tag Browser'
         ),
+        ToolbarService._createToolButton(
+          'SculptorTool',
+          'tool-sculptor',
+          'Sculpt',
+          [
+            {
+              commandName: 'setToolActive',
+              commandOptions: {
+                toolName: 'FreehandROISculptorTool',
+              },
+              context: 'CORNERSTONE',
+            },
+          ],
+          'FreehandROISculptor Tool'
+        ),
       ],
     },
   },

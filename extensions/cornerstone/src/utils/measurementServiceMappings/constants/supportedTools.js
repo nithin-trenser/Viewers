@@ -9,4 +9,7 @@ export default [
   'Probe',
   'RectangleROI',
   'PlanarFreehandROI',
+  'OpenFreehandROI',
+  'ClosedFreehandROI',
+  'ContourROI',
 ];

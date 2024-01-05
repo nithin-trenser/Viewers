@@ -60,6 +60,10 @@ function initDefaultToolGroup(
       { toolName: toolNames.PlanarFreehandROI },
       { toolName: toolNames.SegmentationDisplay },
       { toolName: toolNames.CalibrationLine },
+      { toolName: toolNames.FreehandROISculptorTool },
+      { toolName: toolNames.ClosedFreehandROI },
+      { toolName: toolNames.OpenFreehandROI },
+      { toolName: toolNames.ContourROITool, configuration: { calculateStats: true } },
     ],
     // enabled
     enabled: [{ toolName: toolNames.ImageOverlayViewer }],

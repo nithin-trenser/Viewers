@@ -206,6 +206,51 @@ const toolbarButtons: Button[] = [
           ],
           'Circle Tool'
         ),
+        ToolbarService._createToolButton(
+          'ClosedFreehand',
+          'tool-closed-freehand',
+          'Closed Freehand',
+          [
+            {
+              commandName: 'setToolActive',
+              commandOptions: {
+                toolName: 'ClosedFreehandROI',
+              },
+              context: 'CORNERSTONE',
+            },
+          ],
+          'ClosedFreehandROI Tool'
+        ),
+        ToolbarService._createToolButton(
+          'OpenFreehand',
+          'tool-open-freehand',
+          'Open Freehand',
+          [
+            {
+              commandName: 'setToolActive',
+              commandOptions: {
+                toolName: 'OpenFreehandROI',
+              },
+              context: 'CORNERSTONE',
+            },
+          ],
+          'OpenFreehandROI Tool'
+        ),
+        ToolbarService._createToolButton(
+          'ContourROI',
+          'tool-contour',
+          'Contour',
+          [
+            {
+              commandName: 'setToolActive',
+              commandOptions: {
+                toolName: 'ContourROI',
+              },
+              context: 'CORNERSTONE',
+            },
+          ],
+          'ContourROI Tool'
+        ),
       ],
     },
   },
