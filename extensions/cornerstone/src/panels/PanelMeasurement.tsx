@@ -25,13 +25,14 @@ export default function PanelMeasurement({
   servicesManager,
   commandsManager,
   customHeader,
+  sendTrackedMeasurementsEvent,
   measurementFilter = filterAny,
   groupingFunction,
   title,
 }: withAppAndFilters): React.ReactNode {
   const measurementsPanelRef = useRef(null);
 
-  const { measurementService } = servicesManager.services;
+  const { measurementService, uiDialogService, displaySetService } = servicesManager.services;
 
   const displayMeasurements = useMeasurements(servicesManager, {
     measurementFilter,
@@ -96,6 +97,21 @@ export default function PanelMeasurement({
     onToggleVisibility: toggleVisibilityMeasurement,
     onToggleLocked: toggleLockMeasurement,
     onRename: renameMeasurement,
+  };
+
+  const onUntrackConfirm = () => {
+    const displaySets = displaySetService.activeDisplaySets;
+    displaySets.forEach(displaySet => {
+      sendTrackedMeasurementsEvent('UNTRACK_SERIES', {
+        SeriesInstanceUID: displaySet.SeriesInstanceUID,
+      });
+      const measurements = measurementService.getMeasurements();
+      measurements.forEach(m => {
+        if (m.referenceSeriesUID === displaySet.SeriesInstanceUID) {
+          measurementService.remove(m.uid);
+        }
+      });
+    });
   };
 
   return (
