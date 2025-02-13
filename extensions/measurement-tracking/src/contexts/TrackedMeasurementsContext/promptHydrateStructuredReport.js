@@ -16,13 +16,14 @@ function promptHydrateStructuredReport(
   ctx,
   evt
 ) {
-  const { uiViewportDialogService, displaySetService } = servicesManager.services;
+  const { uiViewportDialogService, displaySetService, customizationService } =
+    servicesManager.services;
   const { viewportId, displaySetInstanceUID } = evt;
   const srDisplaySet = displaySetService.getDisplaySetByUID(displaySetInstanceUID);
   return new Promise(async function (resolve, reject) {
     const promptResult = appConfig?.disableSegmentationPrompts
       ? RESPONSE.HYDRATE_REPORT
-      : await _askTrackMeasurements(uiViewportDialogService, viewportId);
+      : await _askTrackMeasurements(uiViewportDialogService, customizationService, viewportId);
 
     // Need to do action here... So we can set state...
     let StudyInstanceUID, SeriesInstanceUIDs;
@@ -49,9 +50,9 @@ function promptHydrateStructuredReport(
   });
 }
 
-function _askTrackMeasurements(uiViewportDialogService, viewportId) {
+function _askTrackMeasurements(uiViewportDialogService, customizationService, viewportId) {
   return new Promise(function (resolve, reject) {
-    const message = 'Do you want to continue tracking measurements for this study?';
+    const message = customizationService.getCustomization('viewportNotification.hydrateSRMessage');
     const actions = [
       {
         id: 'no-hydrate',
