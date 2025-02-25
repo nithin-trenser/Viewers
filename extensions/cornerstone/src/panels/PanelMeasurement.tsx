@@ -113,7 +113,9 @@ export default function PanelMeasurement({
       });
     });
   };
-
+  const hasDirtyMeasurements = measurementService
+    .getMeasurements()
+    .some(measurement => measurement.isDirty);
   return (
     <>
       <div
@@ -138,6 +140,9 @@ export default function PanelMeasurement({
                 <MeasurementTable
                   title={title ? title : `Measurements`}
                   data={item.measurements}
+                  uiDialogService={uiDialogService}
+                  onUntrackConfirm={onUntrackConfirm}
+                  displayPrompt={hasDirtyMeasurements}
                   {...onArgs}
                 >
                   <MeasurementTable.Header>

@@ -1,5 +1,6 @@
 import { hydrateStructuredReport } from '@ohif/extension-cornerstone-dicom-sr';
 import { ButtonEnums } from '@ohif/ui';
+import { measurementTrackingMode } from './promptBeginTracking';
 
 const RESPONSE = {
   NO_NEVER: -1,
@@ -21,9 +22,11 @@ function promptHydrateStructuredReport(
   const { viewportId, displaySetInstanceUID } = evt;
   const srDisplaySet = displaySetService.getDisplaySetByUID(displaySetInstanceUID);
   return new Promise(async function (resolve, reject) {
-    const promptResult = appConfig?.disableSegmentationPrompts
-      ? RESPONSE.HYDRATE_REPORT
-      : await _askTrackMeasurements(uiViewportDialogService, customizationService, viewportId);
+    const standardMode = appConfig?.measurementTrackingMode === measurementTrackingMode.STANDARD;
+
+    const promptResult = standardMode
+      ? await _askTrackMeasurements(uiViewportDialogService, customizationService, viewportId)
+      : RESPONSE.HYDRATE_REPORT;
 
     // Need to do action here... So we can set state...
     let StudyInstanceUID, SeriesInstanceUIDs;

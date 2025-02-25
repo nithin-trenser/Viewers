@@ -30,6 +30,7 @@ function PanelMeasurementTableTracking({
       extensionManager={extensionManager}
       commandsManager={commandsManager}
       measurementFilter={measurementFilter}
+      sendTrackedMeasurementsEvent={sendTrackedMeasurementsEvent}
       customHeader={({ additionalFindings, measurements }) => {
         const disabled = additionalFindings.length === 0 && measurements.length === 0;
 

@@ -13,6 +13,7 @@ const discardStudyMessage = i18n.t(
 const hydrateSRMessage = i18n.t('Do you want to continue tracking measurements for this study?');
 const hydrateRTMessage = i18n.t('Do you want to open this Segmentation?');
 const hydrateSEGMessage = i18n.t('Do you want to open this Segmentation?');
+const discardDirtyMessage = i18n.t('There are unsaved measurements. Do you want to save it?');
 
 export default {
   'ui.notificationComponent': Notification,
@@ -24,4 +25,5 @@ export default {
   'viewportNotification.hydrateSRMessage': hydrateSRMessage,
   'viewportNotification.hydrateRTMessage': hydrateRTMessage,
   'viewportNotification.hydrateSEGMessage': hydrateSEGMessage,
+  'viewportNotification.discardDirtyMessage': discardDirtyMessage,
 };

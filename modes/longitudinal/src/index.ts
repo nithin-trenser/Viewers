@@ -84,7 +84,8 @@ function modeFactory({ modeConfiguration }) {
      * Lifecycle hooks
      */
     onModeEnter: function ({ servicesManager, extensionManager, commandsManager }: withAppTypes) {
-      const { measurementService, toolbarService, toolGroupService } = servicesManager.services;
+      const { measurementService, toolbarService, toolGroupService, customizationService } =
+        servicesManager.services;
 
       measurementService.clearMeasurements();
 
@@ -104,6 +105,24 @@ function modeFactory({ modeConfiguration }) {
         'MoreTools',
       ]);
 
+      customizationService.setCustomizations({
+        customOnDropHandler: {
+          $set: async props => {
+            const { servicesManager, appConfig } = props;
+            const utilityModule = extensionManager.getModuleEntry(
+              '@ohif/extension-measurement-tracking.utilityModule.common'
+            );
+            const { measurementTrackingMode } = utilityModule.exports;
+            const simplifiedMode =
+              appConfig.measurementTrackingMode === measurementTrackingMode.SIMPLIFIED;
+            const { measurementService } = servicesManager.services;
+            const measurements = measurementService.getMeasurements();
+            const haveDirtyMeasurements = measurements.some(m => m.isDirty);
+            const handled = simplifiedMode && haveDirtyMeasurements;
+            return Promise.resolve({ handled });
+          },
+        },
+      });
       // // ActivatePanel event trigger for when a segmentation or measurement is added.
       // // Do not force activation so as to respect the state the user may have left the UI in.
       // _activatePanelTriggersSubscriptions = [

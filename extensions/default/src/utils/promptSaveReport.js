@@ -9,7 +9,7 @@ async function promptSaveReport({ servicesManager, commandsManager, extensionMan
   const isBackupSave = evt.isBackupSave === undefined ? evt.data.isBackupSave : evt.isBackupSave;
   const StudyInstanceUID = evt?.data?.StudyInstanceUID;
   const SeriesInstanceUID = evt?.data?.SeriesInstanceUID;
-
+  const { displaySetInstanceUID } = evt.data ?? evt;
   const { trackedStudy, trackedSeries } = ctx;
   let displaySetInstanceUIDs;
 
@@ -66,6 +66,7 @@ async function promptSaveReport({ servicesManager, commandsManager, extensionMan
       SeriesInstanceUID,
       viewportId,
       isBackupSave,
+      displaySetInstanceUID,
     };
   } catch (error) {
     return null;
