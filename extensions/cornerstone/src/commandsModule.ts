@@ -210,17 +210,22 @@ function commandsModule({
       const labelConfig = customizationService.getCustomization('measurementLabels');
       const renderContent = customizationService.getCustomization('ui.labellingComponent');
       const measurement = measurementService.getMeasurement(uid);
-      showLabelAnnotationPopup(measurement, uiDialogService, labelConfig, renderContent).then(
-        (val: Map<any, any>) => {
-          measurementService.update(
-            uid,
-            {
-              ...val,
-            },
-            true
-          );
-        }
-      );
+      const element = _getActiveViewportEnabledElement()?.viewport?.element;
+      showLabelAnnotationPopup(
+        measurement,
+        uiDialogService,
+        labelConfig,
+        renderContent,
+        element
+      ).then((val: Map<any, any>) => {
+        measurementService.update(
+          uid,
+          {
+            ...val,
+          },
+          true
+        );
+      });
     },
 
     /**
@@ -328,17 +333,22 @@ function commandsModule({
       const labelConfig = customizationService.getCustomization('measurementLabels');
       const renderContent = customizationService.getCustomization('ui.labellingComponent');
       const measurement = measurementService.getMeasurement(uid);
-      showLabelAnnotationPopup(measurement, uiDialogService, labelConfig, renderContent).then(
-        val => {
-          measurementService.update(
-            uid,
-            {
-              ...val,
-            },
-            true
-          );
-        }
-      );
+      const element = _getActiveViewportEnabledElement()?.viewport?.element;
+      showLabelAnnotationPopup(
+        measurement,
+        uiDialogService,
+        labelConfig,
+        renderContent,
+        element
+      ).then(val => {
+        measurementService.update(
+          uid,
+          {
+            ...val,
+          },
+          true
+        );
+      });
     },
 
     toggleLockMeasurement: ({ uid }) => {

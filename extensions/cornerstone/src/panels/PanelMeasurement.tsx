@@ -100,18 +100,7 @@ export default function PanelMeasurement({
   };
 
   const onUntrackConfirm = () => {
-    const displaySets = displaySetService.activeDisplaySets;
-    displaySets.forEach(displaySet => {
-      sendTrackedMeasurementsEvent('UNTRACK_SERIES', {
-        SeriesInstanceUID: displaySet.SeriesInstanceUID,
-      });
-      const measurements = measurementService.getMeasurements();
-      measurements.forEach(m => {
-        if (m.referenceSeriesUID === displaySet.SeriesInstanceUID) {
-          measurementService.remove(m.uid);
-        }
-      });
-    });
+    sendTrackedMeasurementsEvent('UNTRACK_ALL', {});
   };
   const hasDirtyMeasurements = measurementService
     .getMeasurements()
