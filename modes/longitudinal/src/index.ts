@@ -257,7 +257,6 @@ function modeFactory({ modeConfiguration }) {
       dicomsr.sopClassHandler,
       dicomRT.sopClassHandler,
     ],
-    hotkeys: [...hotkeys.defaults.hotkeyBindings],
     ...modeConfiguration,
   };
 }
