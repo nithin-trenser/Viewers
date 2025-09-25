@@ -2230,6 +2230,19 @@ function commandsModule({
         deleting,
       });
     },
+    stretchViewport: ({ direction, stretchFactor }) => {
+      const activeViewport = viewportGridService.getActiveViewportId();
+      const viewport = cornerstoneViewportService.getCornerstoneViewport(activeViewport);
+      viewport.getActors().forEach(actor => {
+        const [x, y, z] = actor.actor.getScale();
+        if (direction === 'vertical') {
+          actor.actor.setScale(x, y + stretchFactor, z);
+        } else if (direction === 'horizondal') {
+          actor.actor.setScale(x, +stretchFactor, y, z);
+        }
+      });
+      viewport.render();
+    },
   };
 
   const definitions = {
@@ -2499,6 +2512,22 @@ function commandsModule({
     },
     deleteActiveAnnotation: {
       commandFn: actions.deleteActiveAnnotation,
+    },
+    stretchX: {
+      commandFn: actions.stretchViewport,
+      options: { direction: 'vertical', stretchFactor: 1 },
+    },
+    stretchY: {
+      commandFn: actions.stretchViewport,
+      options: { direction: 'horizondal', stretchFactor: 1 },
+    },
+    unStretchX: {
+      commandFn: actions.stretchViewport,
+      options: { direction: 'vertical', stretchFactor: -1 },
+    },
+    unStretchY: {
+      commandFn: actions.stretchViewport,
+      options: { direction: 'horizondal', stretchFactor: -1 },
     },
     setDisplaySetsForViewports: actions.setDisplaySetsForViewports,
     undo: actions.undo,

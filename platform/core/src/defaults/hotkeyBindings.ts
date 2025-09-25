@@ -227,6 +227,30 @@ const bindings = [
     keys: ['a'],
     isEditable: true,
   },
+  {
+    commandName: 'stretchY',
+    label: 'Stretch Y',
+    keys: ['y'],
+    isEditable: true,
+  },
+  {
+    commandName: 'unStretchY',
+    label: 'Stretch Y',
+    keys: ['shift + y'],
+    isEditable: true,
+  },
+  {
+    commandName: 'stretchX',
+    label: 'Stretch X',
+    keys: ['x'],
+    isEditable: true,
+  },
+  {
+    commandName: 'unStretchX',
+    label: 'Stretch Y',
+    keys: ['shift + x'],
+    isEditable: true,
+  },
 ];
 
 export default bindings;
